@@ -2,6 +2,7 @@ package dk.via.sorting;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class ParallelSorter {
     private static long[] randomArray(int size) {
@@ -14,7 +15,10 @@ public class ParallelSorter {
     }
 
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
         long[] testArray = randomArray(200_000_000);
+        System.out.println("Press ENTER");
+        in.nextLine();
         long start = System.currentTimeMillis();
         Arrays.sort(testArray);
         System.out.println(System.currentTimeMillis() - start);
