@@ -17,7 +17,6 @@ public class Start {
         BurgerBarCustomer sarah = new BurgerBarCustomer("Sarah", burgerBar, 1);
         start(joe);
         start(liz);
-        Thread.sleep(5000);
         start(jack);
         start(jill);
         start(alex);
