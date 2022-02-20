@@ -12,7 +12,7 @@ public class BurgerBarEmployee implements Runnable {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
