@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserModelManager implements UserModel {
     private final List<User> users;
-    private final PropertyChangeSupport support;
+    private PropertyChangeSupport support;
 
     public UserModelManager() {
         this.users = new ArrayList<>();
@@ -50,12 +50,12 @@ public class UserModelManager implements UserModel {
     }
 
     @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
+    public void addPropertyChangeListener(String eventName, PropertyChangeListener listener) {
+        support.addPropertyChangeListener(eventName, listener);
     }
 
     @Override
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
+    public void removePropertyChangeListener(String eventName, PropertyChangeListener listener) {
+        support.removePropertyChangeListener(eventName, listener);
     }
 }

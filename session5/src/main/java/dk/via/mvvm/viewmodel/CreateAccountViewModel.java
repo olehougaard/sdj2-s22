@@ -10,11 +10,11 @@ import java.beans.PropertyChangeSupport;
 
 public class CreateAccountViewModel implements PropertyChangeListener {
     private final UserModel model;
-    private final PropertyChangeSupport support;
     private final StringProperty username;
     private final StringProperty password;
     private final StringProperty email;
     private final StringProperty error;
+    private final PropertyChangeSupport support;
 
     public CreateAccountViewModel(UserModel model) {
         this.model = model;
@@ -23,7 +23,7 @@ public class CreateAccountViewModel implements PropertyChangeListener {
         this.email = new SimpleStringProperty("");
         this.error = new SimpleStringProperty("");
         this.support = new PropertyChangeSupport(this);
-        model.addPropertyChangeListener(this);
+        model.addPropertyChangeListener("userCount", this);
     }
 
     public void createUser() {
@@ -60,16 +60,14 @@ public class CreateAccountViewModel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("userCount")) {
-            support.firePropertyChange("displayMessage", false, true);
-        }
+        support.firePropertyChange("showMessage", false, true);
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        support.addPropertyChangeListener(propertyName, listener);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        support.removePropertyChangeListener(listener);
+    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        support.removePropertyChangeListener(propertyName, listener);
     }
 }

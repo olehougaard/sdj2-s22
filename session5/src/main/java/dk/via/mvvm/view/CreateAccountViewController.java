@@ -6,7 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
-public class CreateAccountViewController {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class CreateAccountViewController implements PropertyChangeListener {
     @FXML private TextField username;
     @FXML private TextField password;
     @FXML private TextField email;
@@ -44,10 +47,7 @@ public class CreateAccountViewController {
         this.viewHandler = viewHandler;
         this.viewModel = createAccountViewModel;
         this.root = root;
-
-        viewModel.addPropertyChangeListener(event -> {
-            viewHandler.openView(ViewHandler.MESSAGE);
-        });
+        this.viewModel.addPropertyChangeListener("showMessage", this);
 
         createAccountViewModel.bindUsername(username.textProperty());
         createAccountViewModel.bindPassword(password.textProperty());
@@ -61,5 +61,10 @@ public class CreateAccountViewController {
 
     public void reset() {
         viewModel.reset();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        viewHandler.openView(ViewHandler.MESSAGE);
     }
 }

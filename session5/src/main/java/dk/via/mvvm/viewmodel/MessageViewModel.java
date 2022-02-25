@@ -14,7 +14,7 @@ public class MessageViewModel implements PropertyChangeListener {
     public MessageViewModel(UserModel model) {
         this.model = model;
         this.message = new SimpleStringProperty();
-        model.addPropertyChangeListener(this);
+        model.addPropertyChangeListener("userCount", this);
     }
 
     public void reset() {
@@ -26,6 +26,6 @@ public class MessageViewModel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        message.set("You have create " + model.getUserCount() + " users.");
+        message.set("You have created " + model.getUserCount() + " users.");
     }
 }
