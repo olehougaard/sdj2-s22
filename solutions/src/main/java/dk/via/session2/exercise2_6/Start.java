@@ -1,7 +1,5 @@
 package dk.via.session2.exercise2_6;
 
-import java.util.Collections;
-
 public class Start {
     public static void main(String[] args) throws InterruptedException {
         Bar bar = new Bar(10);
