@@ -1,12 +1,12 @@
-package dk.via.session4.exercise4_2.view;
+package dk.via.session4.exercise4_3.view;
 
-import dk.via.session4.exercise4_2.viewmodel.ViewModelFactory;
+import dk.via.session4.exercise4_3.viewmodel.ViewModelFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class ViewHandler {
-    public static final String CONVERT = "convert";
+    public static final String CALCULATOR = "calculator";
 
     private final Scene currentScene;
     private Stage primaryStage;
@@ -19,12 +19,12 @@ public class ViewHandler {
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        openView(CONVERT);
+        openView(CALCULATOR);
     }
 
     public void openView(String id) {
         Region root = switch(id) {
-            case CONVERT -> viewFactory.loadConvertView();
+            case CALCULATOR -> viewFactory.loadConvertView();
             default -> throw new IllegalArgumentException("Unknown view: " + id);
         };
         currentScene.setRoot(root);

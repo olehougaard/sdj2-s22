@@ -1,9 +1,9 @@
-package dk.via.session4.exercise4_2;
+package dk.via.session4.exercise4_3;
 
-import dk.via.session4.exercise4_2.model.Model;
-import dk.via.session4.exercise4_2.model.ModelManager;
-import dk.via.session4.exercise4_2.view.ViewHandler;
-import dk.via.session4.exercise4_2.viewmodel.ViewModelFactory;
+import dk.via.session4.exercise4_3.model.Model;
+import dk.via.session4.exercise4_3.model.ModelManager;
+import dk.via.session4.exercise4_3.view.ViewHandler;
+import dk.via.session4.exercise4_3.viewmodel.ViewModelFactory;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -1,7 +1,6 @@
 package dk.via.session4.exercise4_2.viewmodel;
 
 import dk.via.session4.exercise4_2.model.Model;
-import dk.via.session4.exercise4_2.model.UserModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
