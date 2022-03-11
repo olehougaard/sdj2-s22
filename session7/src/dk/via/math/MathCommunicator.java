@@ -17,9 +17,31 @@ public class MathCommunicator implements Runnable {
 
             OutputStream outputStream = socket.getOutputStream();
 
-            while(true) {
+            ObjectInputStream input = new ObjectInputStream(inputStream);
+            ObjectOutputStream output = new ObjectOutputStream(outputStream);
+
+            loop: while(true) {
+                String request = (String) input.readObject();
+                switch (request) {
+                    case "+": {
+                        double a = input.readDouble();
+                        double b = input.readDouble();
+                        output.writeDouble(a + b);
+                        output.flush();
+                        break;
+                    }
+                    case "-": {
+                        double a = input.readDouble();
+                        double b = input.readDouble();
+                        output.writeDouble(a - b);
+                        output.flush();
+                        break;
+                    }
+                    case "exit":
+                        break loop;
+                }
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             try {
