@@ -18,10 +18,24 @@ public class EchoClientImplementation implements EchoClient {
 
     @Override
     public String echo(String message) throws IOException {
-        return null;
+        writer.println("echo");
+        writer.println(message);
+        writer.flush();
+        return reader.readLine();
+    }
+
+    @Override
+    public String uppercase(String message) throws IOException {
+        writer.println("uppercase");
+        writer.println(message);
+        writer.flush();
+        return reader.readLine();
     }
 
     @Override
     public void close() throws IOException {
+        writer.println("exit");
+        writer.flush();
+        socket.close();
     }
 }

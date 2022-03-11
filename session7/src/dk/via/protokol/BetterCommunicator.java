@@ -2,6 +2,7 @@ package dk.via.protokol;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Locale;
 
 public class BetterCommunicator implements Runnable {
     private final Socket socket;
@@ -19,8 +20,22 @@ public class BetterCommunicator implements Runnable {
             OutputStream outputStream = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(outputStream);
 
-            while(true) {
+            loop: while(true) {
                 String request = reader.readLine();
+                switch(request) {
+                    case "exit":
+                        break loop;
+                    case "echo":
+                        String message = reader.readLine();
+                        writer.println(message);
+                        writer.flush();
+                        break;
+                    case "uppercase":
+                        String message1 = reader.readLine();
+                        writer.println(message1.toUpperCase());
+                        writer.flush();
+                        break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
