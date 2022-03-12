@@ -36,6 +36,8 @@ public class MathClientImplementation implements MathClient {
 
     @Override
     public void close() throws IOException {
+        output.writeObject("exit");
+        output.flush();
         socket.close();
     }
 }
