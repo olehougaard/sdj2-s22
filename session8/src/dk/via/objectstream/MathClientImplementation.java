@@ -19,14 +19,28 @@ public class MathClientImplementation implements MathClient {
     @Override
     public double plus(double operand1, double operand2) throws IOException {
         Expression expression = new Expression("+", operand1, operand2);
+        output.writeObject(expression);
+        output.flush();
         Result result = null;
+        try {
+            result = (Result) input.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return result.getValue();
     }
 
     @Override
     public double minus(double operand1, double operand2) throws IOException {
         Expression expression = new Expression("-", operand1, operand2);
+        output.writeObject(expression);
+        output.flush();
         Result result = null;
+        try {
+            result = (Result) input.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return result.getValue();
     }
 

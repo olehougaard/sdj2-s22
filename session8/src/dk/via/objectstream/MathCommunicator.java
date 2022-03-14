@@ -21,16 +21,20 @@ public class MathCommunicator implements Runnable {
 
             loop: while(true) {
                 Expression request = (Expression) input.readObject();
-                String operator = null;
-                double a = 0;
-                double b = 0;
+                String operator = request.getOperator();
+                double a = request.getOperand1();
+                double b = request.getOperand2();
                 switch (operator) {
                     case "+": {
                         Result result = new Result(a + b);
+                        output.writeObject(result);
+                        output.flush();
                         break;
                     }
                     case "-": {
                         Result result = new Result(a - b);
+                        output.writeObject(result);
+                        output.flush();
                         break;
                     }
                     case "exit":

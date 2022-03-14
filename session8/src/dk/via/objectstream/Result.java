@@ -1,6 +1,8 @@
 package dk.via.objectstream;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
     private final double value;
 
     public Result(double value) {

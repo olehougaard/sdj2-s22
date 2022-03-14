@@ -27,14 +27,22 @@ public class MathClientImplementation implements MathClient {
     @Override
     public double plus(double operand1, double operand2) throws IOException {
         Expression expression = new Expression("+", operand1, operand2);
-        Result result = null;
+        String json = gson.toJson(expression);
+        output.println(json);
+        output.flush();
+        String resultJson = input.readLine();
+        Result result = gson.fromJson(resultJson, Result.class);
         return result.getValue();
     }
 
     @Override
     public double minus(double operand1, double operand2) throws IOException {
         Expression expression = new Expression("-", operand1, operand2);
-        Result result = null;
+        String json = gson.toJson(expression);
+        output.println(json);
+        output.flush();
+        String resultJson = input.readLine();
+        Result result = gson.fromJson(resultJson, Result.class);
         return result.getValue();
     }
 

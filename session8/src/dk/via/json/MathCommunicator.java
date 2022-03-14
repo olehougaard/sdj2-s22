@@ -23,16 +23,24 @@ public class MathCommunicator implements Runnable {
             PrintWriter output = new PrintWriter(outputStream);
 
             loop: while(true) {
-                String operator = null;
-                double a = 0;
-                double b = 0;
+                String json = input.readLine();
+                Expression expression = gson.fromJson(json, Expression.class);
+                String operator = expression.getOperator();
+                double a = expression.getOperand1();
+                double b = expression.getOperand2();
                 switch (operator) {
                     case "+": {
                         Result r = new Result(a + b);
+                        String resultJson = gson.toJson(r);
+                        output.println(resultJson);
+                        output.flush();
                         break;
                     }
                     case "-": {
                         Result r = new Result(a - b);
+                        String resultJson = gson.toJson(r);
+                        output.println(resultJson);
+                        output.flush();
                         break;
                     }
                     case "exit":
