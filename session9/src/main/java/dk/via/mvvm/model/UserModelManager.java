@@ -9,12 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserModelManager implements UserModel {
+    private static UserModelManager instance;
     private final List<User> users;
     private PropertyChangeSupport support;
 
-    public UserModelManager() {
+    private UserModelManager() {
         this.users = new ArrayList<>();
         this.support = new PropertyChangeSupport(this);
+    }
+
+    public static UserModelManager getInstance() {
+        if (instance == null) {
+            synchronized (UserModelManager.class) {
+                if (instance == null) {
+                    instance = new UserModelManager();
+                }
+            }
+        }
+        return instance;
     }
 
     public void addUser(String username, String password, String emailString) {

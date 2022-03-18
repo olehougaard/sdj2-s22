@@ -19,7 +19,7 @@ public abstract class MediaUploader {
         try {
             outputStream.write(content.getTitle().getBytes());
             outputStream.write(content.getCaption().getBytes());
-            outputStream.write(0x7b); // I don't actually know how to do this.
+            outputStream.write(0x7b); // I don't actually know how to do this. Probably JSON.
         } finally {
             outputStream.close();
         }
