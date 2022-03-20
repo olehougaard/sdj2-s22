@@ -7,5 +7,7 @@ module dk.via {
     opens dk.via.calculator.view to javafx.fxml;
     opens dk.via.calculator to javafx.fxml;
 
+    opens dk.via.calculator.model to com.google.gson;
+
     exports dk.via.calculator;
 }
