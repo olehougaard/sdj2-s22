@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import dk.via.calculator.model.Expression;
 import dk.via.calculator.model.Result;
+import dk.via.calculator.socket.StreamFactory;
 
 import java.io.*;
 import java.net.Socket;
@@ -20,10 +21,8 @@ public class MathClientImplementation implements MathClient {
 
     public MathClientImplementation(String host, int port) throws IOException {
         this.socket = new Socket(host, port);
-        OutputStream outputStream = socket.getOutputStream();
-        this.output = new PrintWriter(outputStream);
-        InputStream inputStream = socket.getInputStream();
-        this.input = new BufferedReader(new InputStreamReader(inputStream));
+        this.output = StreamFactory.createWriter(socket);
+        this.input = StreamFactory.createReader(socket);
         this.gson = new Gson();
     }
 

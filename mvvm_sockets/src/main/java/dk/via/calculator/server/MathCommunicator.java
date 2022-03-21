@@ -3,6 +3,7 @@ package dk.via.calculator.server;
 import com.google.gson.Gson;
 import dk.via.calculator.model.Expression;
 import dk.via.calculator.model.Result;
+import dk.via.calculator.socket.StreamFactory;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,12 +19,8 @@ public class MathCommunicator implements Runnable {
 
     private void communicate() throws IOException {
         try {
-            InputStream inputStream = socket.getInputStream();
-            OutputStream outputStream = socket.getOutputStream();
-
-            BufferedReader input = new BufferedReader(new InputStreamReader(inputStream));
-            PrintWriter output = new PrintWriter(outputStream);
-
+            BufferedReader input = StreamFactory.createReader(socket);
+            PrintWriter output = StreamFactory.createWriter(socket);
             while (true) {
                 String json = input.readLine();
                 Expression expression = gson.fromJson(json, Expression.class);
@@ -39,6 +36,7 @@ public class MathCommunicator implements Runnable {
                     case "-" -> new Result(a - b);
                     case "*" -> new Result(a * b);
                     case "/" -> new Result(a / b);
+                    default -> new Result(Double.NaN);
                 };
                 String resultJson = gson.toJson(r);
                 output.println(resultJson);
