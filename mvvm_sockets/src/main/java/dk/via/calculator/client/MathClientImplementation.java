@@ -6,6 +6,8 @@ import dk.via.calculator.model.Expression;
 import dk.via.calculator.model.Result;
 import dk.via.calculator.socket.StreamFactory;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.net.Socket;
 
@@ -18,12 +20,14 @@ public class MathClientImplementation implements MathClient {
     private final PrintWriter output;
     private final BufferedReader input;
     private final Gson gson;
+    private final PropertyChangeSupport support;
 
     public MathClientImplementation(String host, int port) throws IOException {
-        this.socket = new Socket(host, port);
-        this.output = StreamFactory.createWriter(socket);
-        this.input = StreamFactory.createReader(socket);
-        this.gson = new Gson();
+        socket = new Socket(host, port);
+        output = StreamFactory.createWriter(socket);
+        input = StreamFactory.createReader(socket);
+        gson = new Gson();
+        support = new PropertyChangeSupport(this);
     }
 
     private double requestResult(Expression expression) throws IOException {
@@ -64,5 +68,15 @@ public class MathClientImplementation implements MathClient {
         output.println(EXIT_JSON);
         output.flush();
         socket.close();
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    @Override
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        support.removePropertyChangeListener(listener);
     }
 }

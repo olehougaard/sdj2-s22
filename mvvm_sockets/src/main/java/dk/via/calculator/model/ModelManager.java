@@ -1,10 +1,15 @@
 package dk.via.calculator.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class ModelManager implements Model {
     private final Calculator calculator;
+    private final PropertyChangeSupport support;
 
     public ModelManager() {
         this.calculator = new Calculator();
+        this.support = new PropertyChangeSupport(this);
     }
 
     @Override
@@ -25,5 +30,15 @@ public class ModelManager implements Model {
     @Override
     public double divide(double a, double b) {
         return calculator.divide(a, b);
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    @Override
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        support.removePropertyChangeListener(listener);
     }
 }

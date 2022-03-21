@@ -1,5 +1,7 @@
 package dk.via.calculator.model;
 
+import java.beans.PropertyChangeListener;
+
 public interface Model {
     double add(double a, double b);
 
@@ -8,4 +10,8 @@ public interface Model {
     double multiply(double a, double b);
 
     double divide(double a, double b);
+
+    void addPropertyChangeListener(PropertyChangeListener listener);
+
+    void removePropertyChangeListener(PropertyChangeListener listener);
 }
