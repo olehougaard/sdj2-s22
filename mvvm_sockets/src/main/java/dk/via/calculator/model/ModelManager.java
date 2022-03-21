@@ -1,35 +1,41 @@
 package dk.via.calculator.model;
 
+import dk.via.calculator.client.MathClient;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 
 public class ModelManager implements Model {
-    private final Calculator calculator;
+    private final MathClient client;
     private final PropertyChangeSupport support;
 
-    public ModelManager() {
-        this.calculator = new Calculator();
+    public ModelManager(MathClient client) {
+        this.client = client;
         this.support = new PropertyChangeSupport(this);
+        client.addPropertyChangeListener(evt -> {
+            support.firePropertyChange(evt);
+        });
     }
 
     @Override
-    public double add(double a, double b) {
-        return calculator.add(a, b);
+    public double add(double a, double b) throws IOException {
+        return client.plus(a, b);
     }
 
     @Override
-    public double subtract(double a, double b) {
-        return calculator.subtract(a, b);
+    public double subtract(double a, double b) throws IOException {
+        return client.minus(a, b);
     }
 
     @Override
-    public double multiply(double a, double b) {
-        return calculator.multiply(a, b);
+    public double multiply(double a, double b) throws IOException {
+        return client.times(a, b);
     }
 
     @Override
-    public double divide(double a, double b) {
-        return calculator.divide(a, b);
+    public double divide(double a, double b) throws IOException {
+        return client.divide(a, b);
     }
 
     @Override
