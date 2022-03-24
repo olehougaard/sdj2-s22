@@ -9,10 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RemoteMathImplementation extends UnicastRemoteObject implements RemoteMath {
-    private final RemotePropertyChangeSupport<Result> support;
-
     public RemoteMathImplementation() throws RemoteException {
-        support = new RemotePropertyChangeSupport<>(this);
     }
 
     @Override
@@ -27,17 +24,14 @@ public class RemoteMathImplementation extends UnicastRemoteObject implements Rem
             default -> throw new RemoteException("Illegal operand");
         };
         Result result = new Result(r, e);
-        support.firePropertyChange("result", null, result);
         return result;
     }
 
     @Override
     public void addPropertyChangeListener(RemotePropertyChangeListener<Result> listener) {
-        support.addPropertyChangeListener(listener);
     }
 
     @Override
     public void removePropertyChangeListener(RemotePropertyChangeListener<Result> listener) {
-        support.removePropertyChangeListener(listener);
     }
 }

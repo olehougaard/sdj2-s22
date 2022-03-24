@@ -15,7 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class MathClientImplementation extends UnicastRemoteObject implements MathClient, RemotePropertyChangeListener<Result> {
+public class MathClientImplementation implements MathClient {
     private final RemoteMath math;
     private final PropertyChangeSupport support;
 
@@ -23,7 +23,6 @@ public class MathClientImplementation extends UnicastRemoteObject implements Mat
         Registry registry = LocateRegistry.getRegistry(host, port);
         math = (RemoteMath) registry.lookup("math");
         support = new PropertyChangeSupport(this);
-        math.addPropertyChangeListener(this);
     }
 
     @Override
@@ -66,11 +65,5 @@ public class MathClientImplementation extends UnicastRemoteObject implements Mat
 
     @Override
     public void close() throws IOException {
-
-    }
-
-    @Override
-    public void propertyChange(RemotePropertyChangeEvent<Result> evt) throws RemoteException {
-        support.firePropertyChange(evt.getPropertyName(), evt.getOldValue(), evt.getNewValue());
     }
 }
