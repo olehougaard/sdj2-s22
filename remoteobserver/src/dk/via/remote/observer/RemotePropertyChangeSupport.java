@@ -94,7 +94,7 @@ import java.util.stream.Stream;
  * <p>
  * A {@code RemotePropertyChangeSupport} instance is thread-safe.
  *
- * @param <Value>
+ * @param <Value> the type of the old and new values. That is, the type of the property changing.
  * @see RemotePropertyChangeListener
  * @see RemotePropertyChangeEvent
  */

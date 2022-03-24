@@ -8,7 +8,7 @@ import java.util.EventListener;
 /**
  * A RemotePropertyChangeEvent is fired whenever a property changes on the server.
  * You can register a RemotePropertyChangeListener with the server to receive notifications when the property changes.
- * @param <Value>
+ * @param <Value> the type of the old and new values. That is, the type of the property changing.
  */
 public interface RemotePropertyChangeListener<Value extends Serializable> extends Remote, EventListener {
     /**
