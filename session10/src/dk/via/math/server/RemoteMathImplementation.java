@@ -6,7 +6,7 @@ import dk.via.math.model.Result;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteMathImplementation  {
+public class RemoteMathImplementation implements RemoteMath {
     public Result evaluate(Expression e) throws RemoteException {
         double operand1 = e.getOperand1();
         double operand2 = e.getOperand2();
