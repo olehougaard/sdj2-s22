@@ -3,7 +3,6 @@ package dk.via.broadcast.server;
 import dk.via.broadcast.model.Expression;
 import dk.via.broadcast.model.Result;
 import dk.via.remote.observer.RemotePropertyChangeListener;
-import dk.via.remote.observer.RemotePropertyChangeSupport;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

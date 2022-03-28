@@ -1,7 +1,5 @@
 package dk.via.broadcast.client;
 
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.rmi.registry.Registry;
 
 public class StartClient {
