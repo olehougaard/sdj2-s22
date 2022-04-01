@@ -7,6 +7,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="remoteobserver" level="application" />
+    <orderEntry type="module-library" exported="">
+      <library name="remoteobserver">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Java/remoteobserver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
