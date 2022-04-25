@@ -19,7 +19,7 @@ public class SqlUserDao implements UserDao {
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=jdbc", "postgres", "admin");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
     }
 
     @Override

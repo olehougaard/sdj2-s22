@@ -15,7 +15,7 @@ public class LoginImplementation implements Login {
     @Override
     public boolean login(String username, String password) throws RemoteException {
         User user = storage.getUser(username);
-        return password.equals(user.getPassword());
+        return user != null && password.equals(user.getPassword());
     }
 
     @Override

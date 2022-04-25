@@ -6,21 +6,25 @@ import dk.via.login.shared.User;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 
 public class LoggerProxy implements Login {
     private final Login login;
+    private BlockingQueue<String> queue;
     private final DefaultLog log;
 
-    public LoggerProxy(Login login) {
+    public LoggerProxy(Login login, BlockingQueue<String> queue) {
         this.login = login;
+        this.queue = queue;
         this.log = DefaultLog.getInstance();
     }
 
     public boolean login(String username, String password) throws RemoteException {
         try {
-            log.log(username + " logged in.");
-        } catch (IOException e) {
-            throw new RemoteException(e.getMessage(), e);
+            queue.put(username + " logged in.");
+        } catch (InterruptedException e) {
+            return false;
         }
         return login.login(username, password);
     }
