@@ -18,13 +18,9 @@ public class DefaultLog {
         currentTime = CurrentTime.getInstance();
     }
 
-    public DefaultLog getInstance() {
+    public static synchronized DefaultLog getInstance() {
         if (instance == null) {
-            synchronized(DefaultLog.class) {
-                if (instance == null) {
-                    instance = new DefaultLog();
-                }
-            }
+            instance = new DefaultLog();
         }
         return instance;
     }
