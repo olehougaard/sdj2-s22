@@ -73,6 +73,17 @@ class RecentElementsTest {
         assertEquals(4, recent.get(1));
     }
 
+    @Test
+    public void adding_an_existing_element_just_moves_it_to_the_top() {
+        recent = new RecentElements<>(3);
+        recent.add(3);
+        recent.add(4);
+        recent.add(3);
+        assertEquals(2, recent.size());
+        assertEquals(3, recent.get(0));
+        assertEquals(4, recent.get(1));
+    }
+
     // Exception
     @Test
     public void negative_indices_throws_IndexOutOfBounds() {

@@ -48,7 +48,7 @@ public class ClientIntegrationTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void calling_client_throws_IOException_if_the_server_has_stopped() throws Exception {
         MathServer mathServer = new MathServer(9999);
         Thread serverThread = new Thread(mathServer);
         serverThread.start();

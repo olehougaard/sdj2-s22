@@ -19,6 +19,7 @@ public class RecentElements<E> {
     }
 
     public void add(E e) {
+        elements.remove(e);
         if (size() == capacity) {
             elements.remove(size() - 1);
         }
