@@ -225,7 +225,7 @@ public class RemotePropertyChangeSupport<Value extends Serializable> {
      * @throws RemoteException if a network error occurs.
      */
     public void firePropertyChange(String propertyName, Value oldValue, Value newValue) throws RemoteException {
-        firePropertyChange(new RemotePropertyChangeEvent<>(sourceBean, propertyName, oldValue, newValue));
+        firePropertyChange(new RemotePropertyChangeEvent<>(propertyName, oldValue, newValue));
     }
 
     @SuppressWarnings("unchecked")

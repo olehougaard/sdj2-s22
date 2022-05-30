@@ -11,32 +11,20 @@ import java.io.Serializable;
  * @param <Value> the type of the old and new values. That is, the type of the property changing.
  */
 public class RemotePropertyChangeEvent<Value extends Serializable> implements Serializable {
-    private final Serializable source;
     private final String propertyName;
     private final Value oldValue;
     private final Value newValue;
 
     /**
      * Creates a new RemotePropertyChangeEvent object.
-     *
-     * @param source the object that has changed a property. The object needs to be Serializable - typically a remote object.
-     * @param propertyName the name of the property that has changed.
+     *  @param propertyName the name of the property that has changed.
      * @param oldValue the old value of the property or null if such a value is meaningless.
      * @param newValue the new value of the property.
      */
-    public RemotePropertyChangeEvent(Serializable source, String propertyName, Value oldValue, Value newValue) {
-        this.source = source;
+    public RemotePropertyChangeEvent(String propertyName, Value oldValue, Value newValue) {
         this.propertyName = propertyName;
         this.oldValue = oldValue;
         this.newValue = newValue;
-    }
-
-    /**
-     * The object that has changed a property.
-     * @return the object that has changed a property.
-     */
-    public Serializable getSource() {
-        return source;
     }
 
     /**
