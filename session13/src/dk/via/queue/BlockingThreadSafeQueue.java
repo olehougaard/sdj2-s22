@@ -43,7 +43,7 @@ public class BlockingThreadSafeQueue<T> implements Queue<T> {
 
     @Override
     public synchronized boolean add(T t) {
-        return add(t);
+        return offer(t);
     }
 
     @Override
