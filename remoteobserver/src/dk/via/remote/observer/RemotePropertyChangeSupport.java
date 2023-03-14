@@ -11,57 +11,14 @@ import java.util.stream.Stream;
 /**
  * This is a utility class that can be used with a server object to support listening remotely to changes.
  * It manages a list of remote listeners and supports firing a property change event to all registered listeners.
- * The class needs to be initialized with a remote object either extending {@link UnicastRemoteObject} or created
- * using {@link UnicastRemoteObject#exportObject(Remote, int)}
- *
- <p>
- * Here is an example of {@code RemotePropertyChangeSupport} usage extending {@code UnicastRemoteObject}:
- * <pre>
- * public class MyService extends UnicastRemoteObject implements ServiceInterface {
- *     private final RemotePropertyChangeSupport pcs;
- *
- *     public MyService() throws RemoteException {
- *         pcs = new RemotePropertyChangeSupport(this);
- *     }
- *
- *   {@literal  @Override}
- *     public void addPropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException {
- *         this.pcs.addPropertyChangeListener(listener);
- *     }
- *
- *   {@literal  @Override}
- *     public void removePropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException {
- *         this.pcs.removePropertyChangeListener(listener);
- *     }
- *
- *     private String value;
- *
- *   {@literal  @Override}
- *     public String getValue() throws RemoteException {
- *         return this.value;
- *     }
- *
- *   {@literal  @Override}
- *     public void setValue(String newValue) throws RemoteException {
- *         String oldValue = this.value;
- *         this.value = newValue;
- *         this.pcs.firePropertyChange("value", oldValue, newValue);
- *     }
- *
- *     [...]
- * }
- * </pre>
- * <p>
- *
-<p>
- * Here is an example of {@code RemotePropertyChangeSupport} using {@code UnicastRemoteObject.exportObject}:
+ *<p>
+ * Here is an example of using {@code RemotePropertyChangeSupport}
  * <pre>
  * public class MyService implements ServiceInterface {
  *     private final RemotePropertyChangeSupport pcs;
  *
  *     public MyService(int port) throws RemoteException {
- *         Remote remote = UnicastRemoteObject.exportObject(this, port);
- *         pcs = new RemotePropertyChangeSupport(remote);
+ *         pcs = new RemotePropertyChangeSupport();
  *     }
  *
  *   {@literal  @Override}
@@ -140,16 +97,13 @@ public class RemotePropertyChangeSupport<Value extends Serializable> {
         }
     }
 
-    private final UnicastRemoteObject sourceBean;
     private final LinkedList<ListenerProxy<Value>> listeners;
 
     /**
      * Creates a new {@code RemotePropertyChangeSupport} object.
      *
-     * @param sourceBean the object that might change properties.
      */
-    public RemotePropertyChangeSupport(UnicastRemoteObject sourceBean) {
-        this.sourceBean = sourceBean;
+    public RemotePropertyChangeSupport() {
         this.listeners = new LinkedList<>();
     }
 

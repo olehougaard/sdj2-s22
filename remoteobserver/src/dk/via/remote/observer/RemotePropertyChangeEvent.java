@@ -17,7 +17,7 @@ public class RemotePropertyChangeEvent<Value extends Serializable> implements Se
 
     /**
      * Creates a new RemotePropertyChangeEvent object.
-     *  @param propertyName the name of the property that has changed.
+     * @param propertyName the name of the property that has changed.
      * @param oldValue the old value of the property or null if such a value is meaningless.
      * @param newValue the new value of the property.
      */
