@@ -162,9 +162,15 @@ public class RemotePropertyChangeSupport<Value extends Serializable> {
     public void firePropertyChange(RemotePropertyChangeEvent<Value> evt) throws RemoteException {
         if (Objects.equals(evt.getOldValue(), evt.getNewValue())) return;
         synchronized(this) {
+            LinkedList<ListenerProxy<Value>> dead = new LinkedList<>();
             for(ListenerProxy<Value> proxy: listeners) {
-                proxy.propertyChange(evt);
+                try {
+                    proxy.propertyChange(evt);
+                } catch (RemoteException e) {
+                    dead.add(proxy);
+                }
             }
+            listeners.removeAll(dead);
         }
     }
 
