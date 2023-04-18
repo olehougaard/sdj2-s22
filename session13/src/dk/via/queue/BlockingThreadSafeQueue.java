@@ -3,12 +3,12 @@ package dk.via.queue;
 import java.util.*;
 
 public class BlockingThreadSafeQueue<T> implements Queue<T> {
-    private final LinkedList<T> elements;
+    private final ArrayDeque<T> elements;
     private final int capacity;
 
     public BlockingThreadSafeQueue(int capacity) {
         this.capacity = capacity;
-        this.elements = new LinkedList<>();
+        this.elements = new ArrayDeque<>();
     }
 
     @Override
@@ -43,12 +43,12 @@ public class BlockingThreadSafeQueue<T> implements Queue<T> {
 
     @Override
     public synchronized boolean add(T t) {
-        return offer(t);
+        return elements.add(t);
     }
 
     @Override
-    public boolean remove(Object o) {
-        return false;
+    public synchronized boolean remove(Object o) {
+        return elements.remove(o);
     }
 
     @Override
@@ -62,18 +62,18 @@ public class BlockingThreadSafeQueue<T> implements Queue<T> {
     }
 
     @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
+    public synchronized boolean removeAll(Collection<?> c) {
+        return elements.removeAll(c);
     }
 
     @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
+    public synchronized boolean retainAll(Collection<?> c) {
+        return elements.retainAll(c);
     }
 
     @Override
-    public void clear() {
-        throw new IllegalStateException();
+    public synchronized void clear() {
+        elements.clear();
     }
 
     @Override
@@ -99,29 +99,23 @@ public class BlockingThreadSafeQueue<T> implements Queue<T> {
                 e.printStackTrace();
             }
         }
-        T head = elements.remove(0);
+        T head = elements.remove();
         notifyAll();
         return head;
     }
 
     @Override
     public synchronized T poll() {
-        return remove();
+        return elements.poll();
     }
 
     @Override
     public synchronized T element() {
-        if (elements.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        return elements.get(0);
+        return elements.element();
     }
 
     @Override
     public synchronized T peek() {
-        if (elements.isEmpty()) {
-            return null;
-        }
-        return elements.get(0);
+        return elements.peek();
     }
 }
