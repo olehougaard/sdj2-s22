@@ -10,6 +10,7 @@ import java.util.EventListener;
  * You can register a RemotePropertyChangeListener with the server to receive notifications when the property changes.
  * @param <Value> the type of the old and new values. That is, the type of the property changing.
  */
+@FunctionalInterface
 public interface RemotePropertyChangeListener<Value extends Serializable> extends Remote, EventListener {
     /**
      * This method gets called when the property is changed.
