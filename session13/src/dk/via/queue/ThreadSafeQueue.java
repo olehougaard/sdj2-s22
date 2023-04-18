@@ -2,8 +2,8 @@ package dk.via.queue;
 
 import java.util.*;
 
-public class ThreadSafeQueue<T> implements Queue<T> {
-    private final ArrayDeque<T> elements;
+public class ThreadSafeQueue<E> implements Queue<E> {
+    private final ArrayDeque<E> elements;
 
     public ThreadSafeQueue() {
         this.elements = new ArrayDeque<>();
@@ -25,7 +25,7 @@ public class ThreadSafeQueue<T> implements Queue<T> {
     }
 
     @Override
-    public synchronized Iterator<T> iterator() {
+    public synchronized Iterator<E> iterator() {
         return elements.iterator();
     }
 
@@ -40,8 +40,8 @@ public class ThreadSafeQueue<T> implements Queue<T> {
     }
 
     @Override
-    public synchronized boolean add(T t) {
-        return elements.add(t);
+    public synchronized boolean add(E e) {
+        return elements.add(e);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ThreadSafeQueue<T> implements Queue<T> {
     }
 
     @Override
-    public synchronized boolean addAll(Collection<? extends T> c) {
+    public synchronized boolean addAll(Collection<? extends E> c) {
         return elements.addAll(c);
     }
 
@@ -75,27 +75,27 @@ public class ThreadSafeQueue<T> implements Queue<T> {
     }
 
     @Override
-    public synchronized boolean offer(T t) {
-        return elements.offer(t);
+    public synchronized boolean offer(E e) {
+        return elements.offer(e);
     }
 
     @Override
-    public synchronized T remove() {
+    public synchronized E remove() {
         return elements.remove();
     }
 
     @Override
-    public synchronized T poll() {
+    public synchronized E poll() {
         return elements.poll();
     }
 
     @Override
-    public synchronized T element() {
+    public synchronized E element() {
         return elements.element();
     }
 
     @Override
-    public synchronized T peek() {
+    public synchronized E peek() {
         return elements.peek();
     }
 }
