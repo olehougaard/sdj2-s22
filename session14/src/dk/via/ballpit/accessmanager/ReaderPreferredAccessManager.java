@@ -1,7 +1,6 @@
 package dk.via.ballpit.accessmanager;
 
 import dk.via.ballpit.BallPit;
-import dk.via.ballpit.ReadOnlyBallPit;
 
 public class ReaderPreferredAccessManager implements AccessManager {
     private final BallPit ballPit;
@@ -32,7 +31,7 @@ public class ReaderPreferredAccessManager implements AccessManager {
             }
         }
         readers++;
-        return ballPit;
+        return new ReadOnlyProxy(ballPit);
     }
 
     @Override

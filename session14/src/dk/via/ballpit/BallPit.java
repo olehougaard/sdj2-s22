@@ -1,6 +1,14 @@
 package dk.via.ballpit;
 
-public interface BallPit extends ReadOnlyBallPit {
+import dk.via.ballpit.accessmanager.ReadOnlyBallPit;
+
+public interface BallPit {
+    int getGreenBalls();
+
+    int getRedBalls();
+
+    int getTotal();
+
     void paintBallGreen();
 
     void paintBallRed();

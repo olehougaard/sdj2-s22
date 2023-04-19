@@ -1,7 +1,5 @@
 package dk.via.ballpit.accessmanager;
 
-import dk.via.ballpit.ReadOnlyBallPit;
-
 public class BallPitPrinter implements Runnable {
     private final AccessManager accessManager;
     private boolean running;

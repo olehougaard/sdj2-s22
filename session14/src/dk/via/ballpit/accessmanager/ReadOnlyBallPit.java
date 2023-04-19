@@ -1,4 +1,4 @@
-package dk.via.ballpit;
+package dk.via.ballpit.accessmanager;
 
 public interface ReadOnlyBallPit {
     int getGreenBalls();
